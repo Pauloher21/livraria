@@ -1,0 +1,75 @@
+
+#include <iostream>
+#include<stdio.h>
+#include <sstream>
+using namespace std;
+struct Livro{
+	
+	char titulo[30];
+	char autor[30];
+	int numreg;
+	double preco;
+	Livro *anterior;
+};
+class Lista_ligada
+{
+	
+
+	private:	
+		Livro *fim;
+	public:
+		Lista_ligada(){fim=(Livro *)NULL;}
+		void novonome();
+		void print();
+};
+void Lista_ligada::novonome(){
+	Livro *novolivro=new Livro;
+
+	cout<<"\nDigite titulo\n";	
+	
+	cin.getline(novolivro->titulo,30);
+	
+	cout<<"\nDigite autor\n";
+		cin.ignore();
+		cin.getline(novolivro->autor,30);
+
+	cout<<"\nDigite preço\n";
+		
+		cin>>novolivro->preco;
+
+	cout<<"\nDigite o Numero de registro\n";
+		
+		cin>>novolivro->numreg;
+
+	novolivro->anterior=fim;
+	fim=novolivro;
+}
+void Lista_ligada::print(){
+	Livro *atual=fim;
+	
+	while(atual!=NULL)
+	{	
+		
+		cout<<"\n\nTítulo\n"<< atual->titulo;	
+		cout<<"\n\nAutor\n"<< atual->autor;
+		cout<<"\n\npreco\n"<< atual->preco;
+		cout<<"\n\nNúmero de Registro\n"<< atual->numreg;
+		atual=atual->anterior;
+	}
+}
+
+int main()
+{
+
+	Lista_ligada li;
+	char opcao;
+
+	do{
+	li.novonome();
+	cout<<"\nInserir outro Livro?";
+	cin>>opcao;
+	cin.ignore();
+	}while(opcao=='s');
+	li.print();
+    return 0;       
+}
